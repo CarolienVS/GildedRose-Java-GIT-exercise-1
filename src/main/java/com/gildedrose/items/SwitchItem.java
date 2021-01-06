@@ -10,10 +10,13 @@ public class SwitchItem extends Item {
     @Override
     public void updateQuality() {
         int factor;
-        if (this.sellIn >= 0 && this.sellIn != 50) factor = 1;
-        else
-        if (this.sellIn < 0) factor = 1;
-        else factor = 2;
-        this.quality = Math.max(this.quality - factor, 0);
+        if (this.sellIn >= 0){
+            factor = 1;
+            this.quality = Math.min(this.quality + factor, 50);
+        }
+        else{
+            factor = 1;
+            this.quality = Math.max(this.quality - factor, 0);
+        }
     }
 }

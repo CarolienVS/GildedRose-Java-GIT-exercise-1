@@ -10,39 +10,30 @@ public class SwitchItemTest {
     private GildedRose app = new GildedRose(items);
 
     @Test
-    void decreaseQualityNormal() {
+    void sellValueSmallerThanZero(){
         app.calculateNextDay();
-        assert(app.items[0].sellIn == 9);
-        assert(app.items[0].quality == 19);
+        assert (app.items[0].sellIn == 9);
+        assert (app.items[0].quality == 21);
+        app.calculateNextDay();
+        assert (app.items[0].sellIn == 7);
+        assert (app.items[0].quality == 23);
     }
 
     @Test
-    void decreaseQualityExpired() {
-        app.items[0].sellIn = 1;
-        app.items[0].quality = 20;
-        app.calculateNextDay();
-        assert(app.items[0].sellIn == 0);
-        assert(app.items[0].quality == 19);
-        app.calculateNextDay();
-        assert(app.items[0].sellIn == -1);
-        assert(app.items[0].quality == 17);
-        app.calculateNextDay();
-        assert(app.items[0].sellIn == -2);
-        assert(app.items[0].quality == 15);
-    }
-
-    @Test
-    void noQualityBelowZero() {
+    void sellInValueSameOrMoreThenZero(){
         app.items[0].sellIn = 1;
         app.items[0].quality = 1;
         app.calculateNextDay();
-        assert(app.items[0].sellIn == 0);
-        assert(app.items[0].quality == 0);
+        assert (app.items[0].sellIn == 0);
+        assert (app.items[0].quality ==2);
         app.calculateNextDay();
-        assert(app.items[0].sellIn == -1);
-        assert(app.items[0].quality == 0);
+        assert (app.items[0].sellIn == -1);
+        assert (app.items[0].quality ==1);
         app.calculateNextDay();
-        assert(app.items[0].sellIn == -2);
-        assert(app.items[0].quality == 0);
+        assert (app.items[0].sellIn == -2);
+        assert (app.items[0].quality ==0);
+        app.calculateNextDay();
+        assert (app.items[0].sellIn == -3);
+        assert (app.items[0].quality ==0);
     }
 }
